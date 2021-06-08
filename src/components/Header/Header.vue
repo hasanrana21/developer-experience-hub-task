@@ -11,8 +11,20 @@
                 <div class="text-end">
                     <button class="cross-button" @click="showModal = false">X</button>
                 </div>
-                <h2>Hasan Rana</h2>
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam eum dolores asperiores reiciendis in vero enim placeat quo aliquam nemo.</p>
+
+                <form v-on:submit.prevent  @submit="logInFormSubmit()" @click="submitedButton = false">
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" name="email" @change="handleInput()" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input type="password" name="password" @change="handleInput()" class="form-control" id="exampleInputPassword1">
+                    </div>
+                    <div class="text-center" @click="submitedButton = true"  >
+                        <button type="submit" class="btn btn-primary" v-if="submitedButton"  id="submit-button">Submit</button>
+                    </div>
+                </form>
             </div>
         </transition>
     </div>
@@ -24,9 +36,17 @@ export default {
         return{
             //data return here
             showModal: true,
+            submitedButton: true,
+            handleInput(){
+
+            },
+
         }
     },
     methods: {
+            logInFormSubmit(){
+                console.log("form submited");
+            },
     }
 }
 </script>
@@ -53,7 +73,6 @@ export default {
         height: 50px;
         margin-right: 40px;
         margin-top: 15px;
-        /* cursor: pointer; */
     }
 
     .modal-overlay{
@@ -78,7 +97,7 @@ export default {
         color: white;
         border-radius: 4px;
         
-        padding: 25px;
+        padding: 30px;
         animation-name: hasan;
 
     }
@@ -90,8 +109,12 @@ export default {
         color: red;
         padding: 0 10px;
         border-radius: 4px;
+        margin-bottom: 35px;
     }
 
+    form label{
+        color: whitesmoke;
+    }
 
 
     .fade-enter-active,
@@ -112,5 +135,40 @@ export default {
     .slide-enter,
     .slide-leave-to {
     transform: translateY(0%) translateX(100vw);
+    }
+
+
+    #submit-button{
+        animation-name: submited;
+        transition: 3s;
+    }
+
+    @keyframes submited {
+        0%{
+            height: 50px;
+            width: 200px;
+        }
+        25%{
+            height: 50px;
+            width: 150px;
+            margin-top: 30px;
+        }
+        50%{
+            height: 50px;
+            width: 120px;
+            border-radius: 50%;
+            margin-top: 50px;
+        }
+        75%{
+            height: 50px;
+            width: 100px;
+            margin-top: 70px;
+        }
+        100%{
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            margin-top: 100px;
+        }
     }
 </style>
