@@ -1,13 +1,11 @@
 <template>
     <div class="home-page">
         <Header/>
-        <!-- <Modal/> -->
     </div>
 </template>
 
 <script>
 import Header from "../Header/Header";
-// import Modal from "../Modal/Modal";
 export default {
     data(){
         return {
@@ -16,7 +14,6 @@ export default {
     },
     components: {
         'Header': Header,
-        // 'Modal': Modal,
     }
 }
 </script>
