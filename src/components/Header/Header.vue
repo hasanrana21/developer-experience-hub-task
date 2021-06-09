@@ -7,28 +7,34 @@
         </transition>
 
         <transition name="slide" appear>
-            <div id="modal" v-if="showModal">
+            <div class="modalClass" v-if="showModal">
                 <div class="text-end">
                     <button class="cross-button" @click="showModal = false">X</button>
                 </div>
 
                 <form v-on:submit.prevent>
-                    <div v-if="submitedButton">
+                    <div id="inputs" v-if="submitedButton">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email address</label>
                             <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         </div>
+
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Password</label>
                             <input type="password" name="password" class="form-control" id="exampleInputPassword1">
                         </div>
                     </div>
                     
-                        <div class="text-center" @click="submitedButton = false">
-                            <button type="submit" @click="submitedButton = true" class="btn btn-primary" id="submit-button">Submit</button>
-                                
-                        </div>
+                    <div class="text-end sendDiv" @click="submitedButton = false">
+                        <button type="submit" class="btn btn-primary" @click="dataSubmit = true" id="submit-button">Submit</button>                              
+                    </div>
                 </form>
+            </div>
+        </transition>
+
+        <transition name="anotherDiv" appear>
+            <div class="slideAfterClick"  v-if="dataSubmit" @click="dataSubmit = true">
+
             </div>
         </transition>
     </div>
@@ -42,7 +48,7 @@ export default {
             showModal: true,
             submitedButton: true,
             show: true,
-
+            dataSubmit: false,
         }
     },
     methods: {
@@ -84,7 +90,7 @@ export default {
         background-color: rgba(0, 0, 0, .5);
     }
 
-    #modal{
+    .modalClass{
         position: fixed;
         right: 0;
         z-index: 99;
@@ -95,8 +101,48 @@ export default {
         color: white;
         border-radius: 4px;
         padding: 30px;
-
+        
     }
+    .modalClass input{
+        max-width: 325px;
+    }
+    .slideAfterClick{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 75;
+        background-color: #22272e;
+            max-width: 100%;
+        animation-name: submited;
+        /* animation-duration: 3s; */
+        /* animation-delay: 2s; */
+    }
+    /* @keyframes submited {
+        0%{
+            text-align: end;
+        background-color: red;
+        }
+        20%{
+        background-color: red;
+        }
+        40%{
+        background-color: red;
+        }
+        60%{
+        background-color: red;
+        }
+        80%{
+        background-color: red;
+        }
+        100%{
+        background-color: red;
+            max-width: 100%;
+        }
+    } */
+
+
 
     .cross-button{
         border: none;
@@ -133,39 +179,13 @@ export default {
     transform: translateY(0%) translateX(100vw);
     }
 
-
-    /* #submit-button{
-        padding: 10px 35px;
-        animation-name: submited;
-        animation-duration: 2s;
+    .anotherDiv-enter-active,
+    .anotherDiv-leave-active {
+    transition: transform .6s;
     }
 
-    @keyframes submited {
-        0%{
-            height: 50px;
-            width: 90px;
-        }
-        25%{
-            height: 50;
-            width: 80px;
-            margin-top: 50px;
-        }
-        50%{
-            height: 50px;
-            width: 70px;
-            border-radius: 50%;
-            margin-top: 100px;
-        }
-        75%{
-            height: 50px;
-            width: 60px;
-            margin-top: 150px;
-        }
-        100%{
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-            margin-top: 200px;
-        }
-    } */
+    .anotherDiv-enter,
+    .anotherDiv-leave-to {
+    transform: translateY(0%) translateX(100vw);
+    }
 </style>
