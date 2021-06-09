@@ -9,7 +9,7 @@
         <transition name="slide" appear>
             <div class="modalClass" v-if="showModal">
                 <div class="text-end">
-                    <button class="cross-button" @click="showModal = false">X</button>
+                    <button class="cross-button" @click="showModal = false || firstSlide()">X</button>
                 </div>
 
                 <form v-on:submit.prevent>
@@ -30,9 +30,9 @@
                     </div> 
                 </form>
         
-        <transition name="secondSlide" appear>
-            <div class="slideAfterSlide"  v-if="dataSubmit" @click="dataSubmit = true"></div>
-        </transition> 
+                <transition name="secondSlide" appear>
+                    <div class="slideAfterSlide"  v-if="dataSubmit" @click="dataSubmit = true"></div>
+                </transition> 
             </div>
 
         </transition>
@@ -56,6 +56,9 @@ export default {
         }
     },
     methods: {
+        firstSlide(){
+            this.dataSubmit = false;
+        }
     }
 }
 </script>
