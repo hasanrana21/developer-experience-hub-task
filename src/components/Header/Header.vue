@@ -9,7 +9,7 @@
         <transition name="slide" appear>
             <div class="modalClass" v-if="showModal">
                 <div class="text-end">
-                    <button class="cross-button" @click="showModal = false || firstSlide()">X</button>
+                    <button class="cross-button" @click="showModal = false || firstSlideClick()">X</button>
                 </div>
 
                 <form v-on:submit.prevent>
@@ -29,15 +29,16 @@
                         <button type="submit" class="btn btn-primary" @click="dataSubmit = true" id="submit-button">Submit</button>                              
                     </div> 
                 </form>
-        
-                <transition name="secondSlide" appear>
-                    <div class="slideAfterSlide"  v-if="dataSubmit" @click="dataSubmit = true"></div>
-                </transition> 
-            </div>
 
+                <div class="secondSlideDiv">
+                    <transition name="secondSlide" appear>
+                        <div class="slideAfterSlide"  v-if="dataSubmit" @click="dataSubmit = true"></div>
+                    </transition>
+                </div>
+            </div>
         </transition>
 
-        <transition name="anotherDiv" appear>
+        <transition name="FirstSlider" appear>
             <div class="slideAfterClick"  v-if="dataSubmit" @click="dataSubmit = true"> </div>
         </transition>
 
@@ -56,7 +57,7 @@ export default {
         }
     },
     methods: {
-        firstSlide(){
+        firstSlideClick(){
             this.dataSubmit = false;
         }
     }
@@ -101,9 +102,8 @@ export default {
         position: fixed;
         right: 0;
         z-index: 99;
-        width: 100%;
         height: 100vh;
-        max-width: 400px;
+        width: 400px;
         background-color: #22272e;
         color: white;
         border-radius: 4px;
@@ -123,7 +123,7 @@ export default {
         background-color: #22272e;
         max-width: 100%;
     }
-    .slideAfterSlide{
+    .slideAfterSlide {
         position: absolute;
         top: 0;
         left: 0;
@@ -131,10 +131,10 @@ export default {
         bottom: 0;
         z-index: 99;
         background-color: lightgrey;
-        width: 100%;
-        margin-right: -30%;
-        margin-left: 15%;
-        margin-top: 10%;
+        width: 1500px;
+        margin-right: 0;
+        margin-left: -200%;
+        margin-top: 16%;
     }
 
 
@@ -152,7 +152,12 @@ export default {
         color: whitesmoke;
     }
 
+    .secondSlideDiv{
+        width: 1050px;
+    }
 
+
+/* Transition Effect Start */
     .fade-enter-active,
     .fade-leave-active{
         transition: opacity 0.5s;
@@ -174,23 +179,27 @@ export default {
     }
 /* end */
 
-    .anotherDiv-enter-active,
-    .anotherDiv-leave-active {
-    transition: transform .6s;
+    .FirstSlider-enter-active{
+    transition: transform 4s;
+    }
+    .FirstSlider-leave-active {
+    transition: transform .2s;
     }
 
-    .anotherDiv-enter,
-    .anotherDiv-leave-to {
+    .FirstSlider-enter,
+    .FirstSlider-leave-to {
     transform: translateY(0%) translateX(100vw);
     }
 /* end */
-    .secondSlide-enter-active,
+    .secondSlide-enter-active{
+    transition: transform 6s;
+    }
     .secondSlide-leave-active {
-    transition: transform .6s;
+    transition: transform .2s;
     }
 
     .secondSlide-enter,
     .secondSlide-leave-to {
-    transform: translateY(0%) translateX(200vw);
+    transform: translateY(0%) translateX(500vw);
     }
 </style>
