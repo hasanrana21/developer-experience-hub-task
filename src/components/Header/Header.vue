@@ -25,18 +25,22 @@
                         </div>
                     </div>
                     
-                    <div class="text-end sendDiv" @click="submitedButton = false">
+                    <div class="text-center sendDiv" @click="submitedButton = false">
                         <button type="submit" class="btn btn-primary" @click="dataSubmit = true" id="submit-button">Submit</button>                              
-                    </div>
+                    </div> 
                 </form>
+        
+        <transition name="secondSlide" appear>
+            <div class="slideAfterSlide"  v-if="dataSubmit" @click="dataSubmit = true"></div>
+        </transition> 
             </div>
+
         </transition>
 
         <transition name="anotherDiv" appear>
-            <div class="slideAfterClick"  v-if="dataSubmit" @click="dataSubmit = true">
-
-            </div>
+            <div class="slideAfterClick"  v-if="dataSubmit" @click="dataSubmit = true"> </div>
         </transition>
+
     </div>
 </template>
 
@@ -112,36 +116,23 @@ export default {
         left: 0;
         right: 0;
         bottom: 0;
-        z-index: 75;
+        z-index: 80;
         background-color: #22272e;
-            max-width: 100%;
-        animation-name: submited;
-        /* animation-duration: 3s; */
-        /* animation-delay: 2s; */
+        max-width: 100%;
     }
-    /* @keyframes submited {
-        0%{
-            text-align: end;
-        background-color: red;
-        }
-        20%{
-        background-color: red;
-        }
-        40%{
-        background-color: red;
-        }
-        60%{
-        background-color: red;
-        }
-        80%{
-        background-color: red;
-        }
-        100%{
-        background-color: red;
-            max-width: 100%;
-        }
-    } */
-
+    .slideAfterSlide{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 99;
+        background-color: lightgrey;
+        width: 100%;
+        margin-right: -30%;
+        margin-left: 15%;
+        margin-top: 10%;
+    }
 
 
     .cross-button{
@@ -168,7 +159,7 @@ export default {
     .fade-leave-to{
         opacity: 0;
     }
-
+/* end */
     .slide-enter-active,
     .slide-leave-active {
     transition: transform .6s;
@@ -178,6 +169,7 @@ export default {
     .slide-leave-to {
     transform: translateY(0%) translateX(100vw);
     }
+/* end */
 
     .anotherDiv-enter-active,
     .anotherDiv-leave-active {
@@ -187,5 +179,15 @@ export default {
     .anotherDiv-enter,
     .anotherDiv-leave-to {
     transform: translateY(0%) translateX(100vw);
+    }
+/* end */
+    .secondSlide-enter-active,
+    .secondSlide-leave-active {
+    transition: transform .6s;
+    }
+
+    .secondSlide-enter,
+    .secondSlide-leave-to {
+    transform: translateY(0%) translateX(200vw);
     }
 </style>
